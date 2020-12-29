@@ -83,9 +83,18 @@ open class CHIPageControlJaloro: CHIBasePageControl {
                 layer.borderWidth = self.borderWidth
                 layer.borderColor = self.tintColor(position: index).cgColor
             }
-            layer.cornerRadius = self.radius
+            layer.cornerRadius = 0
             layer.frame = frame
             frame.origin.x += self.elementWidth + self.padding
+            if index == inactive.count - 1 {
+                layer.cornerRadius = self.radius
+                layer.masksToBounds = true
+                layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+            } else if index == 0 {
+                layer.cornerRadius = self.radius
+                layer.masksToBounds = true
+                layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            }
         }
         update(for: progress)
     }
