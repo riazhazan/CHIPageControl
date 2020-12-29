@@ -86,14 +86,16 @@ open class CHIPageControlJaloro: CHIBasePageControl {
             layer.cornerRadius = 0
             layer.frame = frame
             frame.origin.x += self.elementWidth + self.padding
-            if index == inactive.count - 1 {
-                layer.cornerRadius = self.radius
-                layer.masksToBounds = true
-                layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-            } else if index == 0 {
-                layer.cornerRadius = self.radius
-                layer.masksToBounds = true
-                layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            if #available(iOS 11.0, *) {
+                if index == inactive.count - 1 {
+                    layer.cornerRadius = self.radius
+                    layer.masksToBounds = true
+                    layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+                } else if index == 0 {
+                    layer.cornerRadius = self.radius
+                    layer.masksToBounds = true
+                    layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+                }
             }
         }
         update(for: progress)
